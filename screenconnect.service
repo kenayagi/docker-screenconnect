@@ -1,0 +1,10 @@
+[Unit]
+Description=ScreenConnect
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=/usr/bin/etcdctl set /screenconnect/%m ${COREOS_PUBLIC_IPV4}
+ExecStart=/usr/bin/docker run --name screenconnect --rm -p 8040:8040 -p 8041:8041 -v /srv/screenconnect:/opt/screenconnect kenayagi/screenconnect
+ExecStop=/usr/bin/etcdctl rm /screenconnect/%m
+ExecStop=/usr/bin/docker stop screenconnect
