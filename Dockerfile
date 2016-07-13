@@ -1,5 +1,8 @@
 FROM debian:jessie
 
+RUN apt-get update
+RUN apt-get -y install wget
+
 RUN mkdir /opt/screenconnect-installer
 
 ADD "https://www.screenconnect.com/Download?Action=DownloadLatest&Platform=Linux&PreRelease=false" /opt/screenconnect-installer/ScreenConnect_Release.tar.gz
