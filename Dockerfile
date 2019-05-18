@@ -1,8 +1,8 @@
-FROM debian:jessie
+FROM debian:stretch
 
 # Install dependencies
 RUN apt-get update
-RUN apt-get -y install wget
+RUN apt-get -y install procps wget
 
 # Clean
 RUN rm -rf /var/lib/apt/lists/*
@@ -17,7 +17,7 @@ RUN tar xvf ScreenConnect_Release.tar.gz
 RUN echo -e "\n\n" | ScreenConnect_*_Install/install.sh
 
 # Volume
-VOLUME /opt/screenconnect/
+VOLUME /opt/
 
 # Ports
 EXPOSE 8040 8041
