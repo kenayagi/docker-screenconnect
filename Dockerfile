@@ -1,17 +1,16 @@
-FROM debian:stretch
+FROM ubuntu:16.04.07
 
 # Install dependencies
-RUN apt-get update
-RUN apt-get -y install procps wget
-
-# Clean
-RUN rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get -y install \
+    procps \
+    wget && \
+    rm -rf /var/lib/apt/lists/*
 
 # Prepare directories
 RUN mkdir /opt/screenconnect-installer
 
 # Setup
-ADD "https://www.screenconnect.com/Download?Action=DownloadLatest&Platform=Linux&PreRelease=false" /opt/screenconnect-installer/ScreenConnect_Release.tar.gz
+ADD "https://d1kuyuqowve5id.cloudfront.net/ScreenConnect_20.2.29488.7513_Release.tar.gz" /opt/screenconnect-installer/ScreenConnect_Release.tar.gz
 WORKDIR /opt/screenconnect-installer/
 RUN tar xvf ScreenConnect_Release.tar.gz
 RUN echo -e "\n\n" | ScreenConnect_*_Install/install.sh
