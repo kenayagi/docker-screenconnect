@@ -1,4 +1,4 @@
-FROM ubuntu:16.04.07
+FROM ubuntu:16.04
 
 # Install dependencies
 RUN apt-get update && apt-get -y install \
@@ -13,7 +13,7 @@ RUN mkdir /opt/screenconnect-installer
 ADD "https://d1kuyuqowve5id.cloudfront.net/ScreenConnect_20.2.29488.7513_Release.tar.gz" /opt/screenconnect-installer/ScreenConnect_Release.tar.gz
 WORKDIR /opt/screenconnect-installer/
 RUN tar xvf ScreenConnect_Release.tar.gz
-RUN echo -e "\n\n" | ScreenConnect_*_Install/install.sh
+RUN ScreenConnect_*_Install/install.sh
 
 # Volume
 VOLUME /opt/
