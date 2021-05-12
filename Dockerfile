@@ -22,6 +22,5 @@ VOLUME /opt/
 EXPOSE 8040 8041
 
 # Command
-ADD run.sh /run.sh
 WORKDIR /opt/screenconnect
-CMD ["/bin/sh", "/run.sh"]
+CMD ["/opt/screenconnect/App_Runtime/bin/mono", "/opt/screenconnect/Bin/ScreenConnect.Service.exe", "startservices", "7"]

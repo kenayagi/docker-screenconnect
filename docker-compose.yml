@@ -1,0 +1,33 @@
+version: "3.5"
+
+services:
+  app:
+    image: kenayagi/screenconnect
+    restart: always
+    #command: sleep 7d # Put the service on pause, so you can exec in the container and manually apply updates
+    #command: /etc/init.d/screenconnect debug # Enable debug on stdout
+    volumes:
+      - ./opt:/opt
+    ports:
+      - "8040:8040"
+      - "8041:8041"
+    networks:
+      - net
+    environment:
+      - TZ=Europe/Rome
+      - MONO_MANAGED_WATCHER=true
+  relay:
+    image: namshi/smtp
+    restart: always
+    networks:
+      - net
+    environment:
+      - MAILNAME=sc.domain.com
+      - SMARTHOST_ADDRESS=mail.domain.com
+      - SMARTHOST_PORT=587
+      - SMARTHOST_USER=apps@domain.com
+      - SMARTHOST_PASSWORD=SuperPassw00rd
+      - SMARTHOST_ALIASES=*.domain.com
+
+networks:
+  net:
